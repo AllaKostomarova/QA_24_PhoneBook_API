@@ -14,6 +14,7 @@ public class RegistrationTestsOkHttp {
     Gson gson = new Gson();
     OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.get("application/json;charset=utf-8");
+    String urlDTO = "https://contactapp-telran-backend.herokuapp.com/v1/user/registration/usernamepassword";
 
     @Test
     public void registrationSuccess() throws IOException {
@@ -24,7 +25,7 @@ public class RegistrationTestsOkHttp {
                 .build();
         RequestBody body = RequestBody.create(gson.toJson(authDTO),JSON);
         Request request = new Request.Builder()
-                .url("https://contactapp-telran-backend.herokuapp.com/v1/user/registration/usernamepassword")
+                .url(urlDTO)
                 .post(body)
                 .build();
 
@@ -37,7 +38,7 @@ public class RegistrationTestsOkHttp {
     }
 
     @Test
-    public void registrationWrongEmail() throws IOException {
+    public void registrationTestWrongEmail() throws IOException {
         int i = (int) ((System.currentTimeMillis()/1000)%3600);
         AuthRequestDTO authDTO = AuthRequestDTO.builder()
                 .username(i+"wrong@@mail")
@@ -45,7 +46,7 @@ public class RegistrationTestsOkHttp {
                 .build();
         RequestBody body = RequestBody.create(gson.toJson(authDTO), JSON);
         Request request = new Request.Builder()
-                .url("https://contactapp-telran-backend.herokuapp.com/v1/user/registration/usernamepassword")
+                .url(urlDTO)
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
@@ -59,7 +60,7 @@ public class RegistrationTestsOkHttp {
     }
 
     @Test
-    public void registrationWrongPassword() throws IOException {
+    public void registrationTestWrongPassword() throws IOException {
         int i = (int) ((System.currentTimeMillis()/1000)%3600);
         AuthRequestDTO authDTO = AuthRequestDTO.builder()
                 .username(i+"wrong@passwod.ru")
@@ -68,7 +69,7 @@ public class RegistrationTestsOkHttp {
 
         RequestBody body = RequestBody.create(gson.toJson(authDTO),JSON);
         Request request = new Request.Builder()
-                .url("https://contactapp-telran-backend.herokuapp.com/v1/user/registration/usernamepassword")
+                .url(urlDTO)
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
@@ -83,7 +84,7 @@ public class RegistrationTestsOkHttp {
     }
 
     @Test
-    public void registrationAlreadyRegisteredUser() throws IOException {
+    public void registrationTestAlreadyRegisteredUser() throws IOException {
         AuthRequestDTO authDTO = AuthRequestDTO.builder()
                 .username("x@x.ru")
                 .password("Test123$")
@@ -91,7 +92,7 @@ public class RegistrationTestsOkHttp {
 
         RequestBody body = RequestBody.create(gson.toJson(authDTO),JSON);
         Request request = new Request.Builder()
-                .url("https://contactapp-telran-backend.herokuapp.com/v1/user/registration/usernamepassword")
+                .url(urlDTO)
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
