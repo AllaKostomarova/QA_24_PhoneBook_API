@@ -31,7 +31,7 @@ public class DataProviderAddNewContact {
 //                .lastName("Coca-Cola")
 //                .email("cola.cola")
 //                .phone("7777777777777")
-//                .address("haus")
+//                .address("house")
 //                .description("wrong email")
 //                .build()});
         return contacts.iterator();

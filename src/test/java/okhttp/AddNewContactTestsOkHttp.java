@@ -38,6 +38,7 @@ public class AddNewContactTestsOkHttp {
         Response response = client.newCall(request).execute();
         ResponseMessageDTO messageDTO = gson.fromJson(response.body().string(), ResponseMessageDTO.class);
         Assert.assertTrue(response.isSuccessful());
+        Assert.assertEquals(response.code(), 200);
         Assert.assertNotNull(messageDTO.getMessage());
         //System.out.println(messageDTO.getMessage());
         Assert.assertTrue(messageDTO.getMessage().contains("Contact was added!"));
@@ -92,7 +93,7 @@ public class AddNewContactTestsOkHttp {
     }
 
     @Test
-    public void addNewContactTest_UnauturisedUserWrongToken() throws IOException {
+    public void addNewContactTest_UnauthorisedUserWrongToken() throws IOException {
         ContactDTO contactDTO = ContactDTO.builder()
                 .name("Kuzya_Unauth")
                 .lastName("Cat_Unauth")
